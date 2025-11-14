@@ -331,7 +331,7 @@
                      onerror="this.alt='Ảnh KTX không tải được'; this.src='https://placehold.co/800x400/eee/ccc?text=Ảnh+Ký+túc+xá';">
             </section>
 
-            <!-- MỚI: Section Bảng dự tính lương (ĐỔI SỐ THÀNH 5) -->
+            <!-- MỚI: Section Bảng dự tính lương (ĐỔI SỐ THÀNH 5) - ĐÃ CẬP NHẬT THEO ẢNH MỚI NHẤT -->
             <section class="mb-8">
                 <h2 class="text-2xl">
                     <i class="fa-solid fa-calculator mr-2"></i>
@@ -340,8 +340,8 @@
                 </h2>
                 <div class="bg-gray-50 p-4 rounded-lg overflow-x-auto">
                     <p class="text-center font-semibold text-gray-700 mb-4">
-                        <span class="block">Tính trên 26 ngày công chuẩn/tháng, tăng ca 2h/ngày công (2 tuần làm ngày - 2 tuần làm đêm)</span>
-                        <span class="block lang-my text-sm mt-1">တစ်လလျှင် ပုံမှန်အလုပ်ရက် ၂၆ ရက်၊ အချိန်ပို ၂ နာရီ/ရက် (နေ့ဆိုင်း ၂ ပတ် - ညဆိုင်း ၂ ပတ်) အတွက် တွက်ချက်ထားသည်။</span>
+                        <span class="block">Tính trên 22 ngày công chuẩn/tháng, tăng ca tối đa 40h/tháng</span>
+                        <span class="block lang-my text-sm mt-1">တစ်လလျှင် ပုံမှန်အလုပ်ရက် ၂၂ ရက်၊ အချိန်ပို tối đa 40 နာရီ/လ အတွက် တွက်ချက်ထားသည်။</span>
                     </p>
                     <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
                         <thead class="bg-gray-100">
@@ -365,130 +365,106 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <!-- Dòng 1-9 -->
+                            <!-- Dòng 1 -->
                             <tr>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">1</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
                                     <span class="block">Lương cơ bản (ca ngày)</span>
                                     <span class="block lang-my text-xs">အခြေခံလစာ (နေ့ဆိုင်း)</span>
                                 </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">2,800,000</td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">5,280,000</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
                             </tr>
+                            <!-- Dòng 2 -->
                             <tr>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">2</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Lương tăng ca (ca ngày - tạm tính 2h/ngày)</span>
-                                    <span class="block lang-my text-xs">အချိန်ပိုလစာ (နေ့ဆိုင်း - ခန့်မှန်း ၂ နာရီ/ရက်)</span>
+                                    <span class="block">Trợ cấp ca đêm</span>
+                                    <span class="block lang-my text-xs">ညဆိုင်း ထောက်ပံ့ကြေး</span>
                                 </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">1,050,000</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">2,201,760</td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
+                                    <span class="block">Làm 10 ngày ca đêm</span>
+                                    <span class="block lang-my text-xs">ညဆိုင်း ၁၀ ရက် လုပ်</span>
+                                </td>
                             </tr>
+                            <!-- Dòng 3 -->
                             <tr>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">3</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Lương cơ bản (ca đêm)</span>
-                                    <span class="block lang-my text-xs">အခြေခံလစာ (ညဆိုင်း)</span>
+                                    <span class="block">Trợ cấp đời sống</span>
+                                    <span class="block lang-my text-xs">နေထိုင်မှုစရိတ် ထောက်ပံ့ကြေး</span>
                                 </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">3,640,000</td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">350,000</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
                             </tr>
+                            <!-- Dòng 4 -->
                             <tr>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">4</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Lương tăng ca (ca đêm - tạm tính 2h/đêm)</span>
-                                    <span class="block lang-my text-xs">အချိန်ပိုလစာ (ညဆိုင်း - ခန့်မှန်း ၂ နာရီ/ည)</span>
+                                    <span class="block">Tăng ca tối đa 40h/tháng</span>
+                                    <span class="block lang-my text-xs">အချိန်ပို tối đa 40 နာရီ/လ</span>
                                 </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">1,575,000</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">2,400,000</td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
+                                    <span class="block">Tính trên mức lương ngày chủ nhật</span>
+                                    <span class="block lang-my text-xs">တနင်္ဂနွေနေ့ လစာနှုန်းဖြင့် တွက်သည်။</span>
+                                </td>
                             </tr>
+                            <!-- Dòng 5 -->
                             <tr>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">5</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Chuyên cần</span>
-                                    <span class="block lang-my text-xs">ပုံမှန်တက်ရောက်မှု</span>
+                                    <span class="block">Hỗ trợ ăn ca 1 bữa/ngày làm việc (2 bữa nếu có tăng ca ngày thường), KTX, xe đưa đón...</span>
+                                    <span class="block lang-my text-xs">အဆိုင်းအလိုက် အစားအသောက် ၁ Bữa/ရက် (အချိန်ပိုရှိလျှင် ၂ Bữa)၊ အဆောင်၊ ကားကြိုပို့...</span>
                                 </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">300,000</td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">Miễn phí</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
                             </tr>
+                            <!-- Dòng 6 -->
                             <tr>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">6</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Hỗ trợ sinh hoạt</span>
-                                    <span class="block lang-my text-xs">နေထိုင်မှုစရိတ် ထောက်ပံ့ကြေး</span>
+                                    <span class="block">Hỗ trợ giáo dục</span>
+                                    <span class="block lang-my text-xs">ပညာရေး ထောက်ပံ့ကြေး</span>
                                 </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">200,000</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">7</td>
+                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">2,500,000</td>
                                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Hỗ trợ nhà ở</span>
-                                    <span class="block lang-my text-xs">အိမ်ရာ ထောက်ပံ့ကြေး</span>
-                                </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">800,000</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">SV ở KTX không nhận khoản này</span>
-                                    <span class="block lang-my text-xs">အဆောင်နေကျောင်းသားများ ဤထောက်ပံ့ကြေးကို မရပါ။</span>
+                                    <span class="block">Nhận sau khi hoàn thành kỳ thực tập với kết quả tốt.</span>
+                                    <span class="block lang-my text-xs">အလုပ်သင်ကာလကို ကောင်းမွန်စွာ ပြီးဆုံးပါက ရရှိမည်။</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">8</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Tăng ca ngày chủ nhật (tạm tính trên 1 ngày)</span>
-                                    <span class="block lang-my text-xs">တနင်္ဂနွေ အချိန်ပို (ခန့်မှန်း ၁ ရက်)</span>
-                                </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">430,769</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">9</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">
-                                    <span class="block">Tăng ca đêm chủ nhật (tạm tính trên 1 đêm)</span>
-                                    <span class="block lang-my text-xs">တနင်္ဂနွေ ညဆိုင်းအချိန်ပို (ခန့်မှန်း ၁ ည)</span>
-                                </td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">646,154</td>
-                                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700"></td>
-                            </tr>
+                            
                             <!-- Dòng Tổng -->
+                            <tr class="bg-gray-100 font-bold">
+                                <td class="px-4 py-3 text-sm text-gray-800 uppercase" colspan="2">
+                                    <span class="block">Tổng</span>
+                                    <span class="block lang-my text-xs font-medium">စုစုပေါင်း</span>
+                                </td>
+                                <td class="px-4 py-3 text-sm text-gray-800" colspan="2"></td>
+                            </tr>
                             <tr class="bg-gray-50 font-bold">
                                 <td class="px-4 py-3 text-sm text-gray-800" colspan="2">
-                                    <span class="block">TH1: Làm đủ 26 ngày, không tăng ca</span>
-                                    <span class="block lang-my text-xs font-medium">TH1: ပုံမှန် ၂၆ ရက်၊ အချိန်ပိုမရှိ</span>
+                                    <span class="block">TH1: Làm đủ 22 công chuẩn, không tăng ca</span>
+                                    <span class="block lang-my text-xs font-medium">TH1: ပုံမှန် ၂၂ ရက်၊ အချိန်ပိုမရှိ</span>
                                 </td>
-                                <td class="px-4 py-3 text-sm text-gray-800">7,740,000</td>
-                                <td class="px-4 py-3 text-sm text-gray-800">1+3+5+6+7</td>
+                                <td class="px-4 py-3 text-sm text-gray-800">8,665,093</td>
+                                <td class="px-4 py-3 text-sm text-gray-800">1+2+3+6/3</td>
                             </tr>
                              <tr class="bg-gray-50 font-bold">
                                 <td class="px-4 py-3 text-sm text-gray-800" colspan="2">
-                                    <span class="block">TH2: Làm đủ 26 ngày, tăng ca 2h/ngày</span>
-                                    <span class="block lang-my text-xs font-medium">TH2: ပုံမှန် ၂၆ ရက်၊ အချိန်ပို ၂ နာရီ/ရက်</span>
+                                    <span class="block">TH2: Làm đủ 22 công chuẩn, tăng ca 40h/tháng</span>
+                                    <span class="block lang-my text-xs font-medium">TH2: ပုံမှန် ၂၂ ရက်၊ အချိန်ပို ၄၀ နာရီ/လ</span>
                                 </td>
-                                <td class="px-4 py-3 text-sm text-gray-800">10,365,000</td>
-                                <td class="px-4 py-3 text-sm text-gray-800">1+2+3+4+5+6+7</td>
-                            </tr>
-                             <tr class="bg-gray-50 font-bold">
-                                <td class="px-4 py-3 text-sm text-gray-800" colspan="2">
-                                    <span class="block">TH3: Làm đủ 26 ngày, tăng ca 1 ngày chủ nhật</span>
-                                    <span class="block lang-my text-xs font-medium">TH3: ပုံမှန် ၂၆ ရက်၊ တနင်္ဂနွေ အချိန်ပို ၁ ရက်</span>
-                                </td>
-                                <td class="px-4 py-3 text-sm text-gray-800">10,795,769</td>
-                                <td class="px-4 py-3 text-sm text-gray-800">1+2+3+4+5+6+7+8</td>
-                            </tr>
-                             <tr class="bg-gray-50 font-bold">
-                                <td class="px-4 py-3 text-sm text-gray-800" colspan="2">
-                                    <span class="block">TH4: Làm đủ 26 ngày, tăng ca 1 đêm chủ nhật</span>
-                                    <span class="block lang-my text-xs font-medium">TH4: ပုံမှန် ၂၆ ရက်၊ တနင်္ဂနွေ ညဆိုင်း ၁ ည</span>
-                                </td>
-                                <td class="px-4 py-3 text-sm text-gray-800">11,011,154</td>
-                                <td class="px-4 py-3 text-sm text-gray-800">1+2+3+4+5+6+7+9</td>
+                                <td class="px-4 py-3 text-sm text-gray-800">11,065,093</td>
+                                <td class="px-4 py-3 text-sm text-gray-800">1+2+3+4+6/3</td>
                             </tr>
                         </tbody>
                         <tfoot class="bg-white">
                             <tr>
                                 <td class="px-4 py-3 text-sm text-gray-600 italic" colspan="4">
-                                    <span class="block"><strong>Ghi chú:</strong> Mức lương phụ thuộc vào thời gian làm việc thực tế của từng nhân viên.</span>
-                                    <span class="block lang-my text-xs mt-1"><strong>မှတ်ချက်:</strong> လစာပမာဏသည် ဝန်ထမ်းတစ်ဦးချင်းစီ၏ အမှန်တကယ် အလုပ်လုပ်ချိန်ပေါ် မူတည်ပါသည်။</span>
+                                    <span class="block"><strong>Ghi chú:</strong> Mức lương phụ thuộc vào thời gian làm việc thực tế của từng nhân viên và kế hoạch sản xuất của nhà máy.</span>
+                                    <span class="block lang-my text-xs mt-1"><strong>မှတ်ချက်:</strong> လစာပမာဏသည် ဝန်ထမ်းတစ်ဦးချင်းစီ၏ အမှန်တကယ် အလုပ်လုပ်ချိန်နှင့် စက်ရုံ၏ ထုတ်လုပ်မှု အစီအစဉ်ပေါ် မူတည်ပါသည်။</span>
                                 </td>
                             </tr>
                         </tfoot>
