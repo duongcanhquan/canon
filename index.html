@@ -3,458 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chương trình Thực tập tại Canon Việt Nam</title>
+    <title>Chương trình thực tập tại Canon Việt Nam</title>
     <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải Font Awesome (cho icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Tải thư viện biểu tượng Lucide -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Google Fonts (Inter) -->
+    <!-- Cấu hình font chữ Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Sử dụng font Inter làm font chữ chính */
+        /* Áp dụng font Inter cho toàn bộ trang */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f4f7f6; /* Một màu nền xám rất nhạt, sang trọng */
         }
 
-        /* Màu đỏ đặc trưng của Canon */
+        /* Tùy chỉnh màu đỏ của Canon */
         .canon-red {
-            color: #DA291C;
-        }
-        .bg-canon-red {
-            background-color: #DA291C;
-        }
-        .border-canon-red {
-            border-color: #DA291C;
+            color: #DA2128;
         }
 
-        /* Kiểu cho nội dung song ngữ */
-        .lang-vi {
-            color: #1f2937; /* Màu chữ chính (gần như đen) */
-            font-weight: 500; /* Hơi đậm một chút */
-            line-height: 1.6;
-        }
+        /* Thêm một font riêng cho tiếng Myanmar để dễ đọc hơn */
         .lang-my {
-            color: #4b5563; /* Màu xám đậm cho bản dịch */
-            font-size: 0.9em;
-            line-height: 1.5;
-            margin-top: 4px;
-            font-style: italic; /* Làm nghiêng để dễ phân biệt */
+            font-family: 'Padauk', 'Inter', sans-serif; /* Padauk là font Myanmar phổ biến */
+            line-height: 1.8;
         }
         
-        /* Hiệu ứng xuất hiện khi cuộn */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Cập nhật kiểu cho danh sách có icon */
+        .icon-list li {
+            display: flex;
+            align-items: flex-start; /* Căn lề trên cùng */
+            margin-bottom: 0.75rem; /* 12px */
+        }
+        .icon-list .fa-icon {
+            margin-right: 0.75rem; /* 12px */
+            margin-top: 0.25rem; /* Căn icon với dòng chữ đầu tiên */
+            flex-shrink: 0;
+            width: 24px; /* Đặt chiều rộng cố định cho icon */
+            text-align: center;
+        }
+        .icon-list .fa-icon i {
+            font-size: 1.25rem; /* 20px */
+            color: #DA2128; /* Màu đỏ Canon */
         }
         
-        /* Ẩn ban đầu */
-        .scroll-reveal {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        /* Class được thêm bằng JS */
-        .visible {
-            animation: fadeInUp 0.8s ease-out forwards;
-            visibility: visible;
+        /* Đảm bảo hình ảnh không bị vỡ bố cục */
+        img.img-cover, img.img-dorm, img.img-bac-ninh {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0.5rem; /* 8px */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
 
-        /* Tùy chỉnh bảng */
-        th {
-            background-color: #f9fafb;
+        /* Thẻ biểu đồ lương */
+        .benefit-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            border-left: 5px solid #DA2128;
+            transition: all 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .benefit-card .card-icon {
+            font-size: 2.5rem;
+            color: #DA2128;
+            margin-bottom: 1rem;
+        }
+
+        /* Tùy chỉnh bảng lương */
+        .salary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .salary-table th, .salary-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .salary-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .salary-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .salary-table .lang-my {
+            font-size: 0.95rem;
+            color: #333;
+        }
+        .salary-table .total-row {
+            font-weight: 700;
+            background-color: #fffbea;
+        }
+        .salary-table .note-row {
+            font-style: italic;
+            font-size: 0.9rem;
+            background-color: #fff;
         }
     </style>
+    <!-- Google Fonts cho Padauk (tiếng Myanmar) -->
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100 text-gray-800">
 
-    <div class="container mx-auto max-w-5xl py-12 px-4">
+    <!-- Container chính -->
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8 bg-white shadow-lg my-8 rounded-lg">
 
-        <!-- Header: Logo và Tiêu đề -->
-        <header class="mb-12 scroll-reveal">
-            <div class="flex justify-between items-center mb-6 px-4">
-                <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/sbs.png" alt="Logo SBS" class="h-12 md:h-16 object-contain"
-                     onerror="this.onerror=null;this.src='https://placehold.co/200x60/e0e0e0/333?text=Logo+SBS';">
-                <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/canon.png" alt="Logo Canon" class="h-12 md:h-16 object-contain"
-                     onerror="this.onerror=null;this.src='https://placehold.co/200x60/e0e0e0/333?text=Logo+Canon';">
+        <!-- Header: Logos -->
+        <header class="flex justify-between items-center pb-4 border-b border-gray-200 mb-6">
+            <div>
+                <!-- Logo VietMy -->
+                <img src="https://github.com/duongcanhquan/image/blob/main/logo%20vietmy.webp?raw=true" alt="Logo VietMy" class="h-16 sm:h-24"
+                     onerror="this.alt='Logo VietMy không tải được'; this.src='https://placehold.co/150x50/eee/ccc?text=Logo+VietMy';">
             </div>
-            
-            <div class="text-center">
-                <h1 class="text-3xl md:text-4xl font-bold canon-red mb-2">
-                    CHƯƠNG TRÌNH THỰC TẬP
-                </h1>
-                <p class="text-xl md:text-2xl font-semibold text-gray-700">
-                    Tại Nhà Máy CANON Việt Nam
-                </p>
-                
-                <!-- Bản dịch tiêu đề -->
-                <h1 class="text-2xl md:text-3xl font-bold canon-red mt-4">
-                    CANON ဗီယက်နမ် စက်ရုံတွင်
-                </h1>
-                <p class="text-lg md:text-xl font-semibold text-gray-500">
-                    အလုပ်သင် အစီအစဉ်
-                </p>
+            <div>
+                <!-- Logo Canon -->
+                <img src="https://github.com/duongcanhquan/image/blob/main/canon.png?raw=true" alt="Logo Canon" class="h-16 sm:h-24"
+                     onerror="this.alt='Logo Canon không tải được'; this.src='https://placehold.co/150x50/eee/ccc?text=Logo+Canon';">
             </div>
         </header>
 
-        <!-- Nội dung chính -->
-        <main class="space-y-10">
-
-            <!-- Card: Thời gian làm việc -->
-            <section class="bg-white shadow-xl rounded-xl overflow-hidden scroll-reveal transition-all duration-300 hover:shadow-2xl">
-                <div class="p-6 md:p-8 bg-gray-50 border-b border-gray-200 flex items-center space-x-3">
-                    <i data-lucide="calendar-clock" class="w-6 h-6 canon-red"></i>
-                    <h2 class="text-2xl font-semibold text-gray-800">Thời gian làm việc & Thực tập</h2>
-                    <h2 class="text-xl font-semibold text-gray-500 mt-1">အလုပ်ချိန် နှင့် အလုပ်သင်ကာလ</h2>
-                </div>
+        <!-- Main Content -->
+        <main>
+            <!-- Tiêu đề chính -->
+            <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 canon-red">
+                <span class="block">CHƯƠNG TRÌNH THỰC TẬP</span>
+                <span class="block">Tại Nhà Máy CANON Việt Nam</span>
                 
-                <div class="p-6 md:p-8 space-y-5">
-                    <div>
-                        <p class="lang-vi">Làm việc 22 ngày/ tháng trong đó nghỉ 3 thứ 7 và 4 chủ nhật.</p>
-                        <p class="lang-my">တစ်လလျှင် ၂၂ ရက် အလုပ်လုပ်ရမည် (စနေ ၃ ရက်၊ တနင်္ဂနွေ ၄ ရက် နားရက်)။</p>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                            <p class="lang-vi"><strong>Ca ngày:</strong> 8h00 – 17h10</p>
-                            <p class="lang-my"><strong>နေ့ဆိုင်း:</strong> ၈:၀၀ – ၁၇:၁၀</p>
+                <!-- Bản dịch Myanmar -->
+                <span class="block lang-my text-2xl sm:text-3xl font-normal text-gray-700 mt-2">CANON ဗီယက်နမ် စက်ရုံတွင် အလုပ်သင် အစီအစဉ်</span>
+            </h1>
+
+            <!-- Section 1: Thời gian làm việc -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-clock mr-2"></i>
+                    <span class="block">1. Thời gian làm việc</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၁. အလုပ်ချိန်</span>
+                </h2>
+                <ul class="list-none list-inside space-y-2 text-gray-700 pl-0 icon-list">
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-calendar-day"></i></span>
+                        <div>
+                            <span class="block">Làm việc 22 ngày/ tháng (trong đó nghỉ 3 thứ 7 và 4 chủ nhật).</span>
+                            <span class="block lang-my">တစ်လလျှင် ၂၂ ရက် အလုပ်လုပ်ရမည် (စနေ ၃ ရက်၊ တနင်္ဂနွေ ၄ ရက် နားရက်)။</span>
                         </div>
-                        <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
-                            <p class="lang-vi"><strong>Ca đêm:</strong> 21h – 06h10</p>
-                            <p class="lang-my"><strong>ညဆိုင်း:</strong> ၂၁:၀၀ – ၆:၁၀</p>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-sun"></i></span>
+                        <div>
+                            <span class="block">Ca ngày: 8h00 – 17h10</span>
+                            <span class="block lang-my">နေ့ဆိုင်း: 8h00 – 17h10</span>
                         </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-moon"></i></span>
+                        <div>
+                            <span class="block">Ca đêm: 21h00 – 06h10</span>
+                            <span class="block lang-my">ညဆိုင်း: 21h00 – 06h10</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-money-bill-trend-up"></i></span>
+                        <div>
+                            <span class="block">Sinh viên được hưởng từ 150%-300% mức lương giờ cơ bản nếu làm: Thêm giờ, ca đêm, làm ngày nghỉ, lễ tết.</span>
+                            <span class="block lang-my">ကျောင်းသားများသည် အချိန်ပို၊ ညဆိုင်း၊ နားရက်များ၊ အစိုးရရုံးပိတ်ရက်များတွင် အလုပ်လုပ်ပါက အခြေခံနာရီလစာ၏ ၁၅၀% မှ ၃၀၀% အထိ ခံစားခွင့်ရှိသည်။</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 2: Sinh viên được hưởng -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-user-graduate mr-2"></i>
+                    <span class="block">2. Sinh viên được hưởng</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၂. ကျောင်းသားများ ခံစားခွင့်</span>
+                </h2>
+                <ul class="list-none list-inside space-y-2 text-gray-700 pl-0 icon-list">
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+                        <div>
+                            <span class="block">Chính sách thực tập có lương của Nhà trường và Doanh nghiệp liên kết với sinh viên nước ngoài.</span>
+                            <span class="block lang-my">နိုင်ငံခြားကျောင်းသားများအတွက် ကျောင်းနှင့် ကုမ္ပဏီတို့ ပူးပေါင်း၍ လစာရ အလုပ်သင် မူဝါဒ။</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-briefcase"></i></span>
+                        <div>
+                            <span class="block">Cơ hội thực tập và làm việc tại môi trường Công ty FDI (Nhật Bản).</span>
+                            <span class="block lang-my">FDI (ဂျပန်) ကုမ္ပဏီ၏ ပတ်ဝန်းကျင်တွင် အလုပ်သင်နှင့် အလုပ်လုပ်ကိုင်ခွင့်။</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-arrow-trend-up"></i></span>
+                        <div>
+                            <span class="block">Thêm kinh nghiệm làm việc.</span>
+                            <span class="block lang-my">အလုပ်အတွေ့အကြုံ တိုးပွားစေခြင်း။</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-wallet"></i></span>
+                        <div>
+                            <span class="block">Nhận được chi phí như người đi làm.</span>
+                            <span class="block lang-my">အလုပ်လုပ်သူများကဲ့သို့ လုပ်ခလစာ ရရှိခြင်း။</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-building-shield"></i></span>
+                        <div>
+                            <span class="block">Hưởng các chế độ của doanh nghiệp.</span>
+                            <span class="block lang-my">ကုမ္ပဏီ၏ ခံစားခွင့်များကို ခံစားရခြင်း။</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- Section 3: Thời gian thực tập -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-calendar-check mr-2"></i>
+                    <span class="block">3. Thời gian thực tập</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၃. အလုပ်သင်ကာလ</span>
+                </h2>
+                <ul class="list-none list-inside space-y-2 text-gray-700 pl-0 icon-list">
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                        <div>
+                            <span class="block">3 tháng kể từ ngày bắt đầu thực tập.</span>
+                            <span class="block lang-my">အလုပ်သင်စတင်သည့်နေ့မှစ၍ ၃ လ။</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-calendar-plus"></i></span>
+                        <div>
+                            <span class="block">Sinh viên có thể được hỗ trợ lên tới 5 tháng khi được Nhà trường cho phép.</span>
+                            <span class="block lang-my">ကျောင်း၏ခွင့်ပြုချက်ဖြင့် အလုပ်သင်ကာလ ၅ လအထိ တိုးမြှင့်နိုင်သည်။</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- MỤC MỚI: MÔ TẢ CÔNG VIỆC -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-person-digging mr-2"></i>
+                    <span class="block">4. Mô tả công việc</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၄. အလုပ်ဖော်ပြချက်</span>
+                </h2>
+                <ul class="list-none list-inside space-y-2 text-gray-700 pl-0 icon-list">
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-industry"></i></span>
+                        <div>
+                            <span class="block">Tham gia hỗ trợ line sản xuất lắp ráp các sản phẩm như máy fax, máy in,... và các linh kiện thiết bị điện tử.</span>
+                            <span class="block lang-my">ဖက်စ်စက်၊ ပရင်တာစက်... နှင့် အီလက်ထရွန်နစ် ပစ္စည်းအစိတ်အပိုင်းများကဲ့သို့ ထုတ်ကုန်များကို တပ်ဆင်သည့် ထုတ်လုပ်မှုလိုင်းတွင် ပါဝင်ကူညီရန်။</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-person-rays"></i></span>
+                        <div>
+                            <span class="block">Tư thế làm việc: Đứng/ngồi theo dây chuyền sản xuất.</span>
+                            <span class="block lang-my">အလုပ်လုပ်ပုံအနေအထား: ထုတ်လုပ်မှုလိုင်းအတိုင်း မတ်တပ်ရပ်/ထိုင်၍ အလုပ်လုပ်ရမည်။</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <!-- HẾT MỤC MỚI -->
+
+            <!-- Image Gallery: Factory -->
+            <section class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <img alt="Hình ảnh nhà máy Canon 1" class="img-cover w-full h-64 object-cover rounded-lg shadow-md"
+                     src="https://github.com/duongcanhquan/image/blob/main/canon.jpg?raw=true"
+                     onerror="this.alt='Ảnh nhà máy 1 không tải được'; this.src='https://placehold.co/600x400/eee/ccc?text=Nhà+máy+Canon';">
+                <img alt="Hình ảnh nhà máy Canon 2" class="img-cover w-full h-64 object-cover rounded-lg shadow-md"
+                     src="https://github.com/duongcanhquan/image/blob/main/c%E1%BB%95ng%20v%C3%A0o%20canon.jpg?raw=true"
+                     onerror="this.alt='Ảnh nhà máy 2 không tải được'; this.src='https://placehold.co/600x400/eee/ccc?text=Cổng+vào+nhà+máy';">
+            </section>
+
+            <!-- Section 5: Chế độ lương -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-hand-holding-dollar mr-2"></i>
+                    <span class="block">5. Chế độ lương của thực tập sinh</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၅. အလုပ်သင် လစာနှင့် ခံစားခွင့်များ</span>
+                </h2>
+                <!-- Sử dụng grid card thay cho list -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Card 1 -->
+                    <div class="benefit-card">
+                        <div class="card-icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                        <h3 class="text-lg font-semibold mb-1">Lương cơ bản</h3>
+                        <p class="text-gray-700">5.280.000 VNĐ / 22 ngày / tháng</p>
+                        <p class="lang-my text-sm">အခြေခံလစာ: 5.280.000 VNĐ / ၂၂ ရက် / ၁ လ</p>
                     </div>
-                    
-                    <div>
-                        <p class="lang-vi">Sinh viên có thể đăng ký làm thêm theo nhu cầu, mức tính làm thêm sẽ bằng 200% mức thu nhập thông thường.</p>
-                        <p class="lang-my">ကျောင်းသားများသည် လိုအပ်သလို အချိန်ပို တောင်းဆိုနိုင်ပြီး အချိန်ပိုလစာမှာ ပုံမှန်ဝင်ငွေ၏ ၂၀၀% ဖြစ်သည်။</p>
+                    <!-- Card 2 -->
+                    <div class="benefit-card">
+                        <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                        <h3 class="text-lg font-semibold mb-1">Trợ cấp đời sống</h3>
+                        <p class="text-gray-700">350.000 VNĐ / tháng</p>
+                        <p class="lang-my text-sm">လူနေမှုစရိတ် ထောက်ပံ့ကြေး: 350.000 VNĐ / ၁ လ</p>
                     </div>
-                    
-                    <div>
-                        <p class="lang-vi">Ngày lễ và ngày nghỉ : Mức làm thêm sẽ bằng 300% mức thu nhập thông thường.</p>
-                        <p class="lang-my">အများပြည်သူရုံးပိတ်ရက်များနှင့် နားရက်များ : အချိန်ပိုလစာမှာ ပုံမှန်ဝင်ငွေ၏ ၃၀၀% ဖြစ်သည်။</p>
+                    <!-- Card 3 -->
+                    <div class="benefit-card">
+                        <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3 class="text-lg font-semibold mb-1">Hỗ trợ giáo dục</h3>
+                        <p class="text-gray-700">3.000.000 VNĐ / Kỳ thực tập</p>
+                        <p class="lang-my text-sm">ပညာရေး ထောက်ပံ့ကြေး: 3.000.000 VNĐ / အလုပ်သင်ကာလ</p>
                     </div>
-                    
-                    <hr class="my-6 border-gray-200">
-                    
-                    <div>
-                        <p class="lang-vi"><strong>Thời gian thực tập:</strong> 3 tháng kể từ ngày bắt đầu thực tập.</p>
-                        <p class="lang-my"><strong>အလုပ်သင်ကာလ:</strong> အလုပ်သင် စတင်သည့်နေ့မှစ၍ ၃ လ။</p>
+                    <!-- Card 4 -->
+                    <div class="benefit-card">
+                        <div class="card-icon"><i class="fa-solid fa-bed"></i></div>
+                        <h3 class="text-lg font-semibold mb-1">Hỗ trợ KTX (theo trường)</h3>
+                        <p class="text-gray-700">Miễn phí ăn theo ca</p>
+                        <p class="lang-my text-sm">အဆောင် (ကျောင်းအလိုက်)၊ အဆိုင်းအလိုက် အစားအသောက် အခမဲ့</p>
                     </div>
-                    
-                    <div>
-                        <p class="lang-vi">Sinh viên có thể được hỗ trợ lên tới 5 tháng khi được Nhà trường cho phép.</p>
-                        <p class="lang-my">ကျောင်းမှခွင့်ပြုပါက ကျောင်းသားများအား ၅ လအထိ ထောက်ပံ့ပေးနိုင်သည်။</p>
+                    <!-- Card 5 -->
+                    <div class="benefit-card">
+                        <div class="card-icon"><i class="fa-solid fa-bus"></i></div>
+                        <h3 class="text-lg font-semibold mb-1">Xe đưa đón miễn phí</h3>
+                        <p class="text-gray-700">Hàng ngày từ KTX</p>
+                        <p class="lang-my text-sm">အဆောင်မှ နေ့စဉ် အကြိုအပို့ယာဉ် အခမဲ့</p>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="benefit-card">
+                        <div class="card-icon"><i class="fa-solid fa-calendar-star"></i></div>
+                        <h3 class="text-lg font-semibold mb-1">Lương ngày lễ/thêm giờ</h3>
+                        <p class="text-gray-700">Hưởng 150% - 300%</p>
+                        <p class="lang-my text-sm">အချိန်ပို/ရုံးပိတ်ရက် လစာ: ၁၅၀% - ၃၀၀%</p>
                     </div>
                 </div>
             </section>
             
-            <!-- Hình ảnh nhà máy -->
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-6 scroll-reveal">
-                <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/canon.jpg" alt="Ảnh nhà máy Canon" 
-                     class="rounded-lg shadow-lg object-cover w-full h-64 transition-transform duration-300 hover:scale-105"
-                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/333?text=Ảnh+nhà+máy';">
-                <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/c%E1%BB%95ng%20v%C3%A0o%20canon.jpg" alt="Cổng vào nhà máy Canon" 
-                     class="rounded-lg shadow-lg object-cover w-full h-64 transition-transform duration-300 hover:scale-105"
-                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/333?text=Cổng+vào+nhà+máy';">
+            <!-- Image: Dorm -->
+            <section class="mb-8">
+                <img alt="Hình ảnh ký túc xá Canon" class="img-dorm w-full h-auto max-h-96 object-cover rounded-lg shadow-md"
+                     src="https://github.com/duongcanhquan/image/blob/main/ktx%20canon.jpg?raw=true"
+                     onerror="this.alt='Ảnh KTX không tải được'; this.src='https://placehold.co/800x400/eee/ccc?text=Ảnh+Ký+túc+xá';">
             </section>
 
-            <!-- Card: Mô tả công việc -->
-            <section class="bg-white shadow-xl rounded-xl overflow-hidden scroll-reveal transition-all duration-300 hover:shadow-2xl">
-                <div class="p-6 md:p-8 bg-gray-50 border-b border-gray-200 flex items-center space-x-3">
-                    <i data-lucide="briefcase" class="w-6 h-6 canon-red"></i>
-                    <h2 class="text-2xl font-semibold text-gray-800">Mô tả công việc</h2>
-                    <h2 class="text-xl font-semibold text-gray-500 mt-1">အလုပ် ဖော်ပြချက်</h2>
+            <!-- Section 6: Bảng dự tính lương -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-calculator mr-2"></i>
+                    <span class="block">6. Bảng dự tính lương (để tham khảo)</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၆. ခန့်မှန်းလစာဇယား (ကိုးကားရန်အတွက်)</span>
+                </h2>
+                <div class="bg-gray-50 p-4 rounded-lg overflow-x-auto">
+                    <p class="text-lg font-semibold mb-3">
+                        Tính trên 22 ngày công chuẩn/tháng, tăng ca tối đa 40h/tháng
+                        <span class="block lang-my font-normal">တစ်လလျှင် အလုပ်လုပ်ရက် ၂၂ ရက်၊ အချိန်ပို နာရီ ၄၀ အထိ တွက်ချက်ထားသည်။</span>
+                    </p>
+                    <table class="salary-table">
+                        <thead>
+                            <tr>
+                                <th>STT<br><span class="lang-my">စဉ်</span></th>
+                                <th>Nội dung<br><span class="lang-my">အကြောင်းအရာ</span></th>
+                                <th>Mức<br><span class="lang-my">ပမာဏ (VND)</span></th>
+                                <th>Ghi chú<br><span class="lang-my">မှတ်ချက်</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Lương cơ bản (ca ngày)<br><span class="lang-my">အခြေခံလစာ (နေ့ဆိုင်း)</span></td>
+                                <td>5,280,000</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Trợ cấp ca đêm<br><span class="lang-my">ညဆိုင်း ထောက်ပံ့ကြေး</span></td>
+                                <td>2,201,760</td>
+                                <td>Làm 10 ngày ca đêm<br><span class="lang-my">ညဆိုင်း ၁၀ ရက်စာ</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Trợ cấp đời sống<br><span class="lang-my">လူနေမှုစရိတ် ထောက်ပံ့ကြေး</span></td>
+                                <td>350,000</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Tăng ca tối đa 40h/tháng<br><span class="lang-my">အချိန်ပို (အများဆုံး ၄၀ နာရီ/လ)</span></td>
+                                <td>2,400,000</td>
+                                <td>Tính trên mức lương ngày chủ nhật<br><span class="lang-my">တနင်္ဂနွေနေ့ လစာနှုန်းဖြင့် တွက်သည်။</span></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Hỗ trợ ăn ca 1 bữa/ngày làm việc (2 bữa nếu có tăng ca ngày thường), KTX, xe đưa đón từ KTX - nơi làm việc<br><span class="lang-my">အဆိုင်းအလိုက် အစားအသောက် (၁ နပ်/ရက်) (သာမန်နေ့ အချိန်ပိုဆင်းပါက ၂ နပ်)၊ အဆောင်၊ အဆောင်မှ အလုပ်သို့ အကြိုအပို့</span></td>
+                                <td>Miễn phí<br><span class="lang-my">အခမဲ့</span></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Hỗ trợ giáo dục<br><span class="lang-my">ပညာရေး ထောက်ပံ့ကြေး</span></td>
+                                <td>3,000,000</td>
+                                <td>Nhận sau khi hoàn thành toàn bộ kỳ thực tập đối với SV có kết quả đánh giá tốt.<br><span class="lang-my">အလုပ်သင်ကာလ အောင်မြင်စွာ ပြီးဆုံးပြီး ကောင်းမွန်သော သုံးသပ်ချက်ရရှိသည့် ကျောင်းသားများအတွက်။</span></td>
+                            </tr>
+                            
+                            <!-- Tổng -->
+                            <tr class="total-row">
+                                <td colspan="4">
+                                    Tổng<br><span class="lang-my">စုစုပေါင်း</span>
+                                </td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2">
+                                    <strong>TH1: Làm đủ 22 công chuẩn, không tăng ca</strong><br>
+                                    <span class="lang-my font-normal"> trường hợp ၁: အလုပ်ရက် ၂၂ ရက် ပြည့်၊ အချိန်ပို မဆင်း</span>
+                                </td>
+                                <td><strong>8,831,760</strong></td>
+                                <td>1+2+3+6/3<br><span class="lang-my">၁+၂+၃+၆/၃</span></td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2">
+                                    <strong>TH2: Làm đủ 22 công chuẩn, tăng ca 40h/tháng</strong><br>
+                                    <span class="lang-my font-normal"> trường hợp ၂: အလုပ်ရက် ၂၂ ရက် ပြည့်၊ အချိန်ပို နာရီ ၄၀ ဆင်း</span>
+                                </td>
+                                <td><strong>11,231,760</strong></td>
+                                <td>1+2+3+4+6/3<br><span class="lang-my">၁+၂+၃+၄+၆/၃</span></td>
+                            </tr>
+
+                            <!-- Ghi chú -->
+                            <tr class="note-row">
+                                <td colspan="4">
+                                    Ghi chú: Mức lương phụ thuộc vào thời gian làm việc thực tế của từng nhân viên và kế hoạch sản xuất của nhà máy<br>
+                                    <span class="lang-my">မှတ်ချက်: လစာပမာဏသည် ဝန်ထမ်းတစ်ဦးချင်းစီ၏ အမှန်တကယ် အလုပ်လုပ်ချိန်နှင့် စက်ရုံ၏ ထုတ်လုပ်မှု အစီအစဉ်ပေါ် မူတည်၍ ပြောင်းလဲနိုင်သည်။</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                
-                <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="space-y-5">
+            </section>
+            <!-- HẾT: Section Bảng dự tính lương -->
+
+
+            <!-- Section 7: Yêu cầu -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-list-check mr-2"></i>
+                    <span class="block">7. Sinh viên cần chuẩn bị</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၇. ကျောင်းသားများ ပြင်ဆင်ရန်လိုအပ်ချက်များ</span>
+                </h2>
+                <ul class="list-none list-inside space-y-2 text-gray-700 pl-0 icon-list">
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-passport"></i></span>
                         <div>
-                            <p class="lang-vi">- Tham gia hỗ trợ line sản xuất lắp ráp các sản phẩm như máy fax, máy in,... và các linh kiện thiết bị điện tử.</p>
-                            <p class="lang-my">- ဖက်စ်စက်များ၊ ပရင်တာများ... နှင့် အီလက်ထရွန်နစ် အစိတ်အပိုင်းများကဲ့သို့သော ထုတ်ကုန်များကို တပ်ဆင်သည့် ထုတ်လုပ်မှုလိုင်းတွင် ပါဝင်ကူညီရမည်။</p>
+                            <span class="block">Hộ chiếu</span>
+                            <span class="block lang-my">ပတ်စ်ပို့</span>
                         </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-image-portrait"></i></span>
                         <div>
-                            <p class="lang-vi">- Tư thế làm việc: Đứng/ngồi theo dây chuyền sản xuất.</p>
-                            <p class="lang-my">- အလုပ်လုပ်ပုံအနေအထား: ထုတ်လုပ်မှုလိုင်းအတိုင်း မတ်တပ်ရပ်/ထိုင်၍ အလုပ်လုပ်ရမည်။</p>
+                            <span class="block">File ảnh thẻ</span>
+                            <span class="block lang-my">ID ဓာတ်ပုံ (ဖိုင်)</span>
                         </div>
-                    </div>
-                    <div>
-                        <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/noi%20bo.jpg" alt="Ảnh làm việc nội bộ" 
-                             class="rounded-lg shadow-lg object-cover w-full h-60 transition-transform duration-300 hover:scale-105"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/e0e0e0/333?text=Ảnh+làm+việc';">
-                    </div>
-                </div>
+                    </li>
+                    <li>
+                        <span class="fa-icon"><i class="fa-solid fa-suitcase"></i></span>
+                        <div>
+                            <span class="block">Trang thiết bị cá nhân</span>
+                            <span class="block lang-my">တစ်ကိုယ်ရည်သုံး ပစ္စည်းများ</span>
+                        </div>
+                    </li>
+                </ul>
             </section>
 
-            <!-- Card: Chế độ lương -->
-            <section class="bg-white shadow-xl rounded-xl overflow-hidden scroll-reveal transition-all duration-300 hover:shadow-2xl">
-                <div class="p-6 md:p-8 bg-gray-50 border-b border-gray-200 flex items-center space-x-3">
-                    <i data-lucide="gem" class="w-6 h-6 canon-red"></i>
-                    <h2 class="text-2xl font-semibold text-gray-800">Chế độ lương và Phúc lợi</h2>
-                    <h2 class="text-xl font-semibold text-gray-500 mt-1">လစာ နှင့် ခံစားခွင့်များ</h2>
-                </div>
-                
-                <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Cột phúc lợi -->
-                    <div class="space-y-5">
-                        <div>
-                            <p class="lang-vi">Lương cơ bản : 5.280.000 VNĐ/ 22 ngày / tháng</p>
-                            <p class="lang-my">အခြေခံလစာ : ၅,၂၈၀,၀၀၀ VNĐ/ ၂၂ ရက် / တစ်လ</p>
-                        </div>
-                        <div>
-                            <p class="lang-vi">Trợ cấp đời sống : 350.000VNĐ/ tháng</p>
-                            <p class="lang-my">နေထိုင်မှုစရိတ် : ၃၅၀,၀၀၀ VNĐ/ တစ်လ</p>
-                        </div>
-                        <div>
-                            <p class="lang-vi">Hỗ trợ giáo dục : 2.500.000 VNĐ / Kỳ thực tập (với sinh viên hoàn thành 100% thời gian theo kỳ thực tập)</p>
-                            <p class="lang-my">ပညာရေးထောက်ပံ့ကြေး : ၂,၅၀၀,၀၀၀ VNĐ / အလုပ်သင်ကာလ (အလုပ်သင်ကာလ ၁၀၀% ပြီးဆုံးသော ကျောင်းသားများအတွက်)</p>
-                        </div>
-                        <div>
-                            <p class="lang-vi">Hưởng lương 200%-300% với ca đêm hoặc các ngày nghỉ/lễ</p>
-                            <p class="lang-my">ညဆိုင်း သို့မဟုတ် အများပြည်သူရုံးပိတ်ရက်/နားရက်များတွင် လစာ ၂၀၀% - ၃၀၀% ခံစားခွင့်</p>
-                        </div>
-                         <div>
-                            <p class="lang-vi">Hỗ trợ KTX theo yêu cầu từ nhà trường, ăn ca miễn phí, xe đưa đón hàng ngày từ KTX đến nhà máy</p>
-                            <p class="lang-my">ကျောင်း၏တောင်းဆိုချက်အရ အဆောင်ထောက်ပံ့ပေးခြင်း၊ အဆိုင်းအလိုက် အစားအသောက် အခမဲ့၊ အဆောင်မှ စက်ရုံသို့ နေ့စဉ် ဖယ်ရီကား ကြို/ပို့</p>
-                        </div>
-                         <div>
-                            <p class="lang-vi">Hỗ trợ xe đưa đón từ nhà trường đến công ty và ngược lại khi kết thúc thực tập</p>
-                            <p class="lang-my">အလုပ်သင်ပြီးဆုံးချိန်တွင် ကျောင်းမှ ကုမ္ပဏီသို့ အပြန်အလှန် ဖယ်ရီကား ထောက်ပံ့ပေးခြင်း</p>
-                        </div>
-                         <div>
-                            <p class="lang-vi">Phụ cấp ca đêm 2.001.600/ 10 buổi/ tháng</p>
-                            <p class="lang-my">ညဆိုင်း ထောက်ပံ့ကြေး ၂,၀၀၁,၆၀၀/ ၁၀ ဆိုင်း/ တစ်လ</p>
-                        </div>
-                         <div>
-                            <p class="lang-vi">Tiền lương được chi trả trực tiếp cho sinh viên từ ngày mùng 10 đến ngày 15 của tháng kế tiếp.</p>
-                            <p class="lang-my">လစာကို နောက်လ၏ ၁၀ ရက်နေ့မှ ၁၅ ရက်နေ့အတွင်း ကျောင်းသားထံ တိုက်ရိုက် ပေးချေမည်။</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Cột ảnh KTX -->
-                    <div class="flex items-center">
-                        <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/ktx%20canon.jpg" alt="Ảnh ký túc xá Canon" 
-                             class="rounded-lg shadow-lg object-cover w-full h-full min-h-[300px] transition-transform duration-300 hover:scale-105"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x600/e0e0e0/333?text=Ảnh+Ký+túc+xá';">
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Card: Bảng lương dự kiến -->
-            <section class="bg-white shadow-xl rounded-xl overflow-hidden scroll-reveal transition-all duration-300 hover:shadow-2xl">
-                <div class="p-6 md:p-8 bg-gray-50 border-b border-gray-200 flex items-center space-x-3">
-                    <i data-lucide="table" class="w-6 h-6 canon-red"></i>
-                    <h2 class="text-2xl font-semibold text-gray-800">Bản tính dự kiến mức lương</h2>
-                    <h2 class="text-xl font-semibold text-gray-500 mt-1">ခန့်မှန်းလစာ တွက်ချက်မှုဇယား</h2>
-                </div>
-                
-                <div class="p-6 md:p-8">
-                    <!-- Tái tạo bảng lương từ ảnh -->
-                    <div class="overflow-x-auto rounded-lg border border-gray-200">
-                        <table class="w-full min-w-max text-sm text-left text-gray-700">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">STT</th>
-                                    <th scope="col" class="px-6 py-3">Nội dung (အကြောင်းအရာ)</th>
-                                    <th scope="col" class="px-6 py-3">Mức (ပမာဏ)</th>
-                                    <th scope="col" class="px-6 py-3">Ghi chú (မှတ်ချက်)</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium">1</td>
-                                    <td class="px-6 py-4 font-medium">Lương cơ bản (ca ngày) (အခြေခံလစာ (နေ့ဆိုင်း))</td>
-                                    <td class="px-6 py-4">5,280,000</td>
-                                    <td class="px-6 py-4"></td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium">2</td>
-                                    <td class="px-6 py-4 font-medium">Trợ cấp ca đêm (ညဆိုင်း ထောက်ပံ့ကြေး)</td>
-                                    <td class="px-6 py-4">2,201,760</td>
-                                    <td class="px-6 py-4">Làm 10 ngày ca đêm (ညဆိုင်း ၁၀ ရက် လုပ်ခ)</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium">3</td>
-                                    <td class="px-6 py-4 font-medium">Trợ cấp đời sống (နေထိုင်မှုစရိတ်)</td>
-                                    <td class="px-6 py-4">350,000</td>
-                                    <td class="px-6 py-4"></td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium">4</td>
-                                    <td class="px-6 py-4 font-medium">Tăng ca tối đa 40h/tháng (အချိန်ပို အများဆုံး ၄၀ နာရီ/လ)</td>
-                                    <td class="px-6 py-4">2,400,000</td>
-                                    <td class="px-6 py-4">Tính trên mức lương ngày chủ nhật (တနင်္ဂနွေနေ့ လစာနှုန်းဖြင့် တွက်ချက်သည်)</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium">5</td>
-                                    <td class="px-6 py-4 font-medium">Hỗ trợ ăn ca 1 bữa/ngày... (အဆိုင်းအလိုက် အစားအသောက်...)</td>
-                                    <td class="px-6 py-4">Miễn phí (အခမဲ့)</td>
-                                    <td class="px-6 py-4"></td>
-                                </tr>
-                                 <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium">6</td>
-                                    <td class="px-6 py-4 font-medium">Hỗ trợ giáo dục (ပညာရေးထောက်ပံ့ကြေး)</td>
-                                    <td class="px-6 py-4">2,500,000</td>
-                                    <td class="px-6 py-4">Nhận sau khi hoàn thành... (အလုပ်သင်ပြီးဆုံး...မှ ရရှိမည်)</td>
-                                </tr>
-                                <tr class="bg-gray-50 font-bold">
-                                    <td colspan="2" class="px-6 py-4">Tổng TH1: Làm đủ 22 công chuẩn, không tăng ca (စုစုပေါင်း TH1: စံချိန်မီ ၂၂ ရက်၊ အချိန်ပိုမဆင်း)</td>
-                                    <td class="px-6 py-4">8,665,093</td>
-                                    <td class="px-6 py-4">1+2+3+6/3</td>
-                                </tr>
-                                <tr class="bg-gray-100 font-bold text-blue-600">
-                                    <td colspan="2" class="px-6 py-4">Tổng TH2: Làm đủ 22 công chuẩn, tăng ca 40h/tháng (စုစုပေါင်း TH2: စံချိန်မီ ၂၂ ရက်၊ အချိန်ပို ၄၀ နာရီ)</td>
-                                    <td class="px-6 py-4 text-lg">11,065,093</td>
-                                    <td class="px-6 py-4">1+2+3+4+6/3</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="mt-6 p-4 bg-yellow-50 border border-yellow-300 rounded-lg">
-                        <p class="lang-vi"><strong>Lưu ý:</strong> Đây là bảng dự kiến, sinh viên có thể nhận nhiều hơn hoặc ít hơn dựa trên mức đăng ký làm việc và thực tế công việc.</p>
-                        <p class="lang-my"><strong>မှတ်ချက်:</strong> ဤသည်မှာ ခန့်မှန်းတွက်ချက်မှုသာဖြစ်ပြီး၊ ကျောင်းသားများသည် အလုပ်ဆင်းချိန်နှင့် လက်တွေ့အလုပ် ပေါ်မူတည်၍ ဝင်ငွေ ပိုများခြင်း သို့မဟုတ် နည်းခြင်း ရှိနိုင်ပါသည်။</p>
-                    </div>
-                    <div>
-                        <p class="lang-vi">Ghi chú: Mức lương phụ thuộc vào thời gian làm việc thực tế của từng nhân viên và kế hoạch sản xuất của nhà máy.</p>
-                        <p class="lang-my">မှတ်ချက်: လစာပမာဏသည် ဝန်ထမ်းတစ်ဦးချင်းစီ၏ အမှန်တကယ် အလုပ်လုပ်ချိန်နှင့် စက်ရုံ၏ ထုတ်လုပ်မှု အစီအစဉ်ပေါ် မူတည်ပါသည်။</p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Card: Chuẩn bị -->
-            <section class="bg-white shadow-xl rounded-xl overflow-hidden scroll-reveal transition-all duration-300 hover:shadow-2xl">
-                <div class="p-6 md:p-8 bg-gray-50 border-b border-gray-200 flex items-center space-x-3">
-                    <i data-lucide="check-square" class="w-6 h-6 canon-red"></i>
-                    <h2 class="text-2xl font-semibold text-gray-800">Sinh viên cần chuẩn bị</h2>
-                    <h2 class="text-xl font-semibold text-gray-500 mt-1">ကျောင်းသားများ ပြင်ဆင်ရန် လိုအပ်သည်များ</h2>
-                </div>
-                
-                <div class="p-6 md:p-8">
-                    <ul class="space-y-5">
-                        <li class="flex items-start space-x-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mt-1 flex-shrink-0"></i>
-                            <div>
-                                <p class="lang-vi">Hộ chiếu</p>
-                                <p class="lang-my">ပတ်စပို့</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mt-1 flex-shrink-0"></i>
-                            <div>
-                                <p class="lang-vi">File ảnh thẻ</p>
-                                <p class="lang-my">ပတ်စပို့အရွယ် ဓာတ်ပုံဖိုင်</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start space-x-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mt-1 flex-shrink-0"></i>
-                            <div>
-                                <p class="lang-vi">Trang thiết bị cá nhân</p>
-                                <p class="lang-my">တစ်ကိုယ်ရည်သုံး ပစ္စည်းများ</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Card: Giới thiệu Bắc Ninh -->
-            <section class="bg-white shadow-xl rounded-xl overflow-hidden scroll-reveal transition-all duration-300 hover:shadow-2xl">
-                <div class="p-6 md:p-8 bg-gray-50 border-b border-gray-200 flex items-center space-x-3">
-                    <i data-lucide="map-pin" class="w-6 h-6 canon-red"></i>
-                    <h2 class="text-2xl font-semibold text-gray-800">Giới thiệu về Bắc Ninh</h2>
-                    <h2 class="text-xl font-semibold text-gray-500 mt-1">ဘတ်နင်မြို့ အကြောင်း မိတ်ဆက်</h2>
-                </div>
-                
-                <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div class="space-y-5">
-                        <div>
-                            <p class="lang-vi">Bắc Ninh – mảnh đất Kinh Bắc giàu truyền thống – luôn cuốn hút du khách bởi nét cổ kính xen lẫn hơi thở hiện đại. Nơi đây được biết đến là cái nôi của dân ca Quan họ với những làn điệu ngọt ngào vang lên giữa không gian lễ hội, bến nước, sân đình.</p>
-                            <p class="lang-my">ဘတ်နင် - ကြွယ်ဝသော ရိုးရာဓလေ့များရှိသော ကင်ဘတ်မြေ - ရှေးဟောင်းအလှနှင့် ခေတ်မီခြင်းတို့ ရောယှက်နေသောကြောင့် ခရီးသွားများကို အမြဲဆွဲဆောင်လျက်ရှိသည်။ ဤနေရာသည် ပွဲတော်များ၊ မြစ်ဆိပ်များနှင့် ဘုံကျောင်းရင်ပြင်များတွင် ပျံ့လွင့်နေသော သာယာငြိမ့်ညောင်းသည့် Quan họ ရိုးရာသီချင်းများ၏ ပုခက်ဖြစ်သည်။</p>
-                        </div>
-                        <div>
-                            <p class="lang-vi">Đến Bắc Ninh, bạn không chỉ được hòa mình vào văn hóa đặc trưng mà còn được khám phá nhiều điểm du lịch nổi tiếng. Tiêu biểu phải kể đến chùa Dâu, ngôi chùa cổ nhất Việt Nam... Đền Đô, nơi thờ tám vị vua triều Lý... làng tranh Đông Hồ... làng gốm Phù Lãng...</p>
-                            <p class="lang-my">ဘတ်နင်သို့ လာရောက်လည်ပတ်ပါက ထူးခြားသော ယဉ်ကျေးမှုတွင် နစ်မြောရုံသာမက ကျော်ကြားသော ခရီးသွားနေရာများစွာကိုလည်း စူးစမ်းလေ့လာနိုင်မည်ဖြစ်သည်။ ဗီယက်နမ်နိုင်ငံ၏ ရှေးအကျဆုံး ဘုရားဖြစ်သော Dâu ဘုရား... လီမင်းဆက် ဘုရင် ၈ ပါးကို ကိုးကွယ်ရာ Đền Đô... Đông Hồ ပန်းချီရွာ... Phù Lãng အိုးလုပ်ရွာ...</p>
-                        </div>
-                         <div>
-                            <p class="lang-vi">Không chỉ giàu văn hóa, Bắc Ninh còn phát triển sôi động với ẩm thực đặc sắc như bánh phu thê, nem Bùi. Đến đây, bạn sẽ cảm nhận trọn vẹn vẻ đẹp giao hòa giữa truyền thống và hiện đại.</p>
-                            <p class="lang-my">ယဉ်ကျေးမှု ကြွယ်ဝရုံသာမက ဘတ်နင်သည် bánh phu thê၊ nem Bùi ကဲ့သို့သော ထူးခြားသည့် အစားအစာများဖြင့်လည်း သက်ဝင်လှုပ်ရှားလျက်ရှိသည်။ ဤနေရာသို့ လာရောက်ခြင်းဖြင့် ရိုးရာနှင့် ခေတ်မီခြင်းတို့ ပေါင်းစပ်နေသည့် အလှတရားကို အပြည့်အဝ ခံစားရမည်ဖြစ်သည်။</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/bac%20ninh.jpg" alt="Ảnh Bắc Ninh" 
-                             class="rounded-lg shadow-lg object-cover w-full h-full min-h-[300px] transition-transform duration-300 hover:scale-105"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x600/e0e0e0/333?text=Ảnh+Bắc+Ninh';">
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Card: Địa điểm -->
-            <section class="bg-white shadow-xl rounded-xl overflow-hidden scroll-reveal transition-all duration-300 hover:shadow-2xl">
-                 <div class="p-6 md:p-8 bg-gray-50 border-b border-gray-200 flex items-center space-x-3">
-                    <i data-lucide="navigation" class="w-6 h-6 canon-red"></i>
-                    <h2 class="text-2xl font-semibold text-gray-800">Địa điểm thực tập</h2>
-                    <h2 class="text-xl font-semibold text-gray-500 mt-1">အလုပ်သင် နေရာ</h2>
-                </div>
-                <div class="p-6 md:p-8">
-                    <p class="lang-vi">Lô B1 Khu công nghiệp Quế Võ, Phường Vân Dương, Tỉnh Bắc Ninh, Việt Nam</p>
-                    <p class="lang-my">Lot B1၊ Que Vo စက်မှုဥယျာဉ်၊ Van Duong ရပ်ကွက်၊ Bac Ninh ပြည်နယ်၊ ဗီယက်နမ်</p>
-                </div>
-            </section>
-
-            <!-- CTA Button -->
-            <section class="py-12 text-center scroll-reveal">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfH76muZd3R2pGu6v3lGHKshyD9Gt22SsMEVenNx9gNZfEQQA/viewform?usp=dialog"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="inline-block bg-canon-red text-white text-lg font-bold py-4 px-10 rounded-lg shadow-lg transition-all duration-300 hover:bg-red-700 hover:shadow-2xl hover:-translate-y-1 transform">
-                    <span class="lang-vi">ĐĂNG KÝ NGAY</span>
-                    <br>
-                    <span class="lang-my text-sm font-medium">(ယခု စာရင်းသွင်းပါ။)</span>
+            <!-- Button Đăng ký -->
+            <section class="text-center mb-8">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfH76muZd3R2pGu6v3lGHKshyD9Gt22SsMEVenNx9gNZfEQQA/viewform?usp=dialog" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="inline-block bg-red-600 text-white font-bold py-4 px-10 rounded-lg text-xl shadow-lg hover:bg-red-700 transition duration-300 transform hover:scale-105">
+                   <i class="fa-solid fa-pen-to-square mr-2"></i>
+                   <span class="block">ĐĂNG KÝ NGAY</span>
+                   <span class="block lang-my font-normal text-lg mt-1">ယခုပင် စာရင်းသွင်းပါ။</span>
                 </a>
             </section>
 
+            <!-- Section 8: Giới thiệu Bắc Ninh -->
+            <section class="mb-8 bg-gray-50 p-6 rounded-lg">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b canon-red">
+                    <i class="fa-solid fa-map-location-dot mr-2"></i>
+                    <span class="block">8. Giới thiệu về Bắc Ninh</span>
+                    <span class="block lang-my font-normal text-xl mt-1">၈. Bắc Ninh မြို့ အကြောင်း မိတ်ဆက်</span>
+                </h2>
+                
+                <img alt="Hình ảnh Bắc Ninh" class="img-bac-ninh w-full h-72 object-cover rounded-lg shadow-md mb-6"
+                     src="https://github.com/duongcanhquan/image/blob/main/bac%20ninh.jpg?raw=true"
+                     onerror="this.alt='Ảnh Bắc Ninh không tải được'; this.src='https://placehold.co/800x300/eee/ccc?text=Ảnh+Bắc+Ninh';">
+
+                <div class="space-y-4 text-gray-700">
+                    <p>
+                        <span class="block">Bắc Ninh – mảnh đất Kinh Bắc giàu truyền thống – luôn cuốn hút du khách bởi nét cổ kính xen lẫn hơi thở hiện đại. Nơi đây được biết đến là cái nôi của dân ca Quan họ với những làn điệu ngọt ngào vang lên giữa không gian lễ hội, bến nước, sân đình. Đến Bắc Ninh, bạn không chỉ được hòa mình vào văn hóa đặc trưng mà còn được khám phá nhiều điểm du lịch nổi tiếng.</span>
+                        <span class="block lang-my mt-2">Bắc Ninh - ရှေးကျသော Kinh Bắc ဒေသသည် ရှေးဟောင်းအငွေ့အသက်နှင့် ခေတ်မီခြင်းတို့ ပေါင်းစပ်ထားသောကြောင့် ခရီးသွားများကို အမြဲဆွဲဆောင်လျက်ရှိသည်။ ဤနေရာသည် ပွဲတော်များ၊ မြစ်ဆိပ်များနှင့် ဘုံကျောင်းကွင်းများတွင် ချိုမြိန်သော တေးသံများ ပျံ့လွင့်နေသည့် Quan họ ရိုးရာသီချင်းများ၏ ပုခက်နေရာအဖြစ် လူသိများသည်။ Bắc Ninh သို့ လာရောက်လည်ပတ်ပါက သင်သည် ထူးခြားသော ယဉ်ကျေးမှုတွင် နစ်မြုပ်နေရုံသာမက ကျော်ကြားသော ခရီးသွားနေရာများစွာကိုလည်း စူးစမ်းလေ့လာနိုင်မည်ဖြစ်သည်။</span>
+                    </p>
+                    <p>
+                        <span class="block">Tiêu biểu phải kể đến chùa Dâu, ngôi chùa cổ nhất Việt Nam, mang dấu ấn Phật giáo hơn 1.800 năm. Chùa Bút Tháp lại gây ấn tượng với lối kiến trúc hài hòa và tượng Quan Âm nghìn mắt nghìn tay tuyệt đẹp. Đền Đô, nơi thờ tám vị vua triều Lý, sở hữu kiến trúc uy nghiêm giữa không gian xanh mát. Du khách yêu nghệ thuật dân gian chắc chắn không thể bỏ qua làng tranh Đông Hồ, nơi gìn giữ tinh hoa tranh khắc gỗ độc đáo. Ngoài ra, làng gốm Phù Lãng với những sản phẩm đất nung mộc mạc cũng là điểm đến hấp dẫn.</span>
+                        <span class="block lang-my mt-2">ဗီယက်နမ်နိုင်ငံ၏ ရှေးအကျဆုံး ဘုရားဖြစ်သည့် Dâu ဘုရားသည် နှစ်ပေါင်း ၁၈၀၀ ကျော် ဗုဒ္ဓဘာသာ၏ သမိုင်းဝင် အထင်ကရနေရာတစ်ခု ဖြစ်သည်။ Bút Tháp ဘုရားသည် လိုက်ဖက်ညီသော ဗိသုကာလက်ရာနှင့် လှပသော မျက်စိတစ်ထောင်၊ လက်တစ်ထောင်ရှိ Quan Âm (ကွမ်ယင်မယ်တော်) ရုပ်ပွားတော်တို့ကြောင့် အထင်ကြီးစရာ ကောင်းလှသည်။ Lý မင်းဆက် ဘုရင် ရှစ်ပါးကို ကိုးကွယ်ရာ Đền Đô ဘုရားကျောင်းသည် စိမ်းလန်းသော နေရာအလယ်တွင် ခံ့ညားထည်ဝါသော ဗိသုကာလက်ရာကို ပိုင်ဆိုင်ထားသည်။ ရိုးရာအနုပညာကို နှစ်သက်သော ခရီးသွားများအတွက် ထူးခြားသော ပန်းပုပန်းချီ၏ အနှစ်သာရကို ထိန်းသိမ်းထားသည့် Đông Hồ ပန်းချီရွာကို လက်မလွှတ်သင့်ပေ။ ထို့အပြင် ရိုးစင်းသော မြေထည်ပစ္စည်းများဖြင့် Phù Lãng အိုးလုပ်ရွာသည်လည်း ဆွဲဆောင်မှုရှိသော နေရာတစ်ခုဖြစ်သည်။</span>
+                    </p>
+                    <p>
+                        <span class="block">Không chỉ giàu văn hóa, Bắc Ninh còn phát triển sôi động với ẩm thực đặc sắc như bánh phu thê, nem Bùi. Đến đây, bạn sẽ cảm nhận trọn vẹn vẻ đẹp giao hòa giữa truyền thống và hiện đại.</span>
+                        <span class="block lang-my mt-2">ယဉ်ကျေးမှု ကြွယ်ဝရုံသာမက Bắc Ninh သည် bánh phu thê၊ nem Bùi ကဲ့သို့သော ထူးခြားသည့် အစားအစာများဖြင့်လည်း စည်ကား သက်ဝင်လျက်ရှိသည်။ ဤနေရာသို့ လာရောက်ပါက ရိုးရာနှင့် ခေတ်မီခြင်းတို့ ပေါင်းစပ်ထားသည့် အလှတရားကို အပြည့်အဝ ခံစားရမည်ဖြစ်သည်။</span>
+                    </p>
+                </div>
+            </section>
         </main>
+
+        <!-- Footer -->
+        <footer class="text-center pt-6 border-t border-gray-200 text-gray-500">
+            <p class="font-semibold">
+                <i class="fa-solid fa-location-dot mr-2"></i>
+                <span class="block">Địa điểm thực tập: Lô B1, Khu công nghiệp Quế Võ, Phường Vân Dương, Tỉnh Bắc Ninh, Việt Nam</span>
+                <span class="block lang-my font-normal mt-1">အလုပ်သင်နေရာ: Lot B1၊ Que Vo စက်မှုဥယျာဉ်၊ Van Duong ရပ်ကွက်၊ Bắc Ninh ပြည်နယ်၊ ဗီယက်နမ်</span>
+            </p>
+            <p class="text-sm mt-4">&copy; 2024 Chương trình thực tập Canon Việt Nam. Mọi quyền được bảo lưu.</p>
+        </footer>
+
     </div>
-
-    <script>
-        // Kích hoạt biểu tượng Lucide
-        lucide.createIcons();
-
-        // JavaScript cho hiệu ứng cuộn
-        document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1 // 10% phần tử phải hiển thị
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target); // Ngừng quan sát sau khi đã hiển thị
-                    }
-                });
-            }, observerOptions);
-
-            // Quan sát tất cả các phần tử có class 'scroll-reveal'
-            const elements = document.querySelectorAll('.scroll-reveal');
-            elements.forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </script>
 
 </body>
 </html>
